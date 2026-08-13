@@ -1,0 +1,34 @@
+body {
+    background-color: #f5f6f8;
+}
+
+.star-rating i {
+    cursor: pointer;
+    font-size: 1.3rem;
+    color: #d0d0d0;
+    margin-right: 3px;
+}
+
+.star-rating i.filled {
+    color: #f5a623;
+}
+
+.navbar-brand i {
+    margin-right: 6px;
+}
+
+.table thead {
+    background-color: #212529;
+    color: #fff;
+}
+
+.sortable {
+    cursor: pointer;
+    user-select: none;
+}
+
+.sortable i {
+    font-size: 0.75rem;
+    margin-left: 4px;
+    opacity: 0.6;
+}
