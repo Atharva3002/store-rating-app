@@ -1,25 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+    --primary: #4f46e5;
+    --accent: #7c3aed;
+    --dark-indigo: #312e81;
+    --radius: 12px;
+}
+
+/* ---------- Base ---------- */
 body {
-    background-color: #f5f6f8;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background-color: #f4f6fb;
+    background-image: linear-gradient(180deg, #e0e7ff 0%, #f4f6fb 320px);
+    background-repeat: no-repeat;
+    color: #1f2937;
+    min-height: 100vh;
 }
 
-.star-rating i {
-    cursor: pointer;
-    font-size: 1.3rem;
-    color: #d0d0d0;
-    margin-right: 3px;
+h4, h5, h6 {
+    font-weight: 700;
+    color: #1e1b4b;
 }
 
-.star-rating i.filled {
-    color: #f5a623;
+/* ---------- Navbar ---------- */
+.navbar.bg-dark {
+    background: linear-gradient(90deg, var(--dark-indigo), var(--primary)) !important;
+    box-shadow: 0 2px 12px rgba(79, 70, 229, 0.3);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 0.3px;
 }
 
 .navbar-brand i {
     margin-right: 6px;
 }
 
-.table thead {
-    background-color: #212529;
+.navbar .nav-link {
+    border-radius: 8px;
+    padding: 0.4rem 0.8rem !important;
+    transition: background 0.2s;
+}
+
+.navbar .nav-link:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* ---------- Cards ---------- */
+.card {
+    border: none;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 16px rgba(31, 41, 55, 0.08) !important;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+/* lift effect only on cards inside grids (store cards, dashboard stats) */
+.row > [class*="col"] > .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(79, 70, 229, 0.18) !important;
+}
+
+.card-title {
+    font-weight: 600;
+}
+
+.card h2 {
+    font-weight: 700;
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: transform 0.15s, filter 0.15s, box-shadow 0.15s;
+}
+
+.btn-dark {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    border: none;
+}
+
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(79, 70, 229, 0.35);
+}
+
+.btn-outline-dark {
+    color: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-outline-dark:hover,
+.btn-outline-dark:active {
+    background-color: var(--primary);
+    border-color: var(--primary);
     color: #fff;
+}
+
+/* ---------- Forms ---------- */
+.form-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+}
+
+.form-control,
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #d6dbe7;
+    padding: 0.55rem 0.75rem;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(79, 70, 229, 0.15);
+}
+
+.form-text {
+    font-size: 0.78rem;
+}
+
+/* ---------- Tables ---------- */
+.table-responsive {
+    border-radius: var(--radius);
+    box-shadow: 0 4px 16px rgba(31, 41, 55, 0.08);
+    background: #fff;
+}
+
+.table {
+    margin-bottom: 0;
+}
+
+.table > :not(caption) > * > * {
+    border-color: #eceff6;
+    padding: 0.8rem 0.9rem;
+}
+
+.table thead th {
+    background-color: var(--dark-indigo);
+    color: #fff;
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+    border-color: var(--dark-indigo);
+}
+
+.table-hover > tbody > tr:hover > * {
+    --bs-table-bg-state: #eef2ff;
 }
 
 .sortable {
@@ -27,8 +160,44 @@ body {
     user-select: none;
 }
 
+.table thead th.sortable:hover {
+    background-color: #3730a3;
+}
+
 .sortable i {
     font-size: 0.75rem;
     margin-left: 4px;
-    opacity: 0.6;
+    opacity: 0.7;
+}
+
+/* ---------- Badges & Alerts ---------- */
+.badge.bg-secondary {
+    background-color: #e0e7ff !important;
+    color: #4338ca;
+    font-weight: 600;
+    text-transform: capitalize;
+    padding: 0.4em 0.75em;
+    border-radius: 20px;
+}
+
+.alert {
+    border: none;
+    border-radius: 10px;
+}
+
+/* ---------- Star rating ---------- */
+.star-rating i {
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #d1d5db;
+    margin-right: 4px;
+    transition: transform 0.15s, color 0.15s;
+}
+
+.star-rating i:hover {
+    transform: scale(1.2);
+}
+
+.star-rating i.filled {
+    color: #f59e0b;
 }
