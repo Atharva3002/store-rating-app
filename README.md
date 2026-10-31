@@ -1,91 +1,176 @@
 # Store Rating Platform
 
-Full-stack coding challenge submission — a web app where users rate stores (1-5), with three roles: System Administrator, Normal User, Store Owner.
+A full-stack Store Rating Platform that allows users to rate stores, store owners to monitor ratings for their stores, and administrators to manage stores and users through a centralized dashboard.
 
-**Stack:** Express.js + PostgreSQL (Sequelize) backend, React (Vite) frontend, Bootstrap 5 + Font Awesome for styling.
+## Tech Stack
 
-## Project Structure
+### Frontend
 
+* React.js (Vite)
+* Bootstrap 5
+* Font Awesome
+
+### Backend
+
+* Node.js
+* Express.js
+* MySQL
+* Sequelize ORM
+
+---
+
+# Prerequisites
+
+Before running the project, make sure the following software is installed on your system:
+
+* Node.js (v18 or later recommended)
+* npm
+* MySQL Server
+* Git
+
+---
+
+# Installation
+
+Clone the repository:
+
+```bash
+git clone <repository-url>
+cd store-rating-app
 ```
-store-rating-app/
-├── backend/
-│   ├── app.js                 # entry point
-│   ├── config/db.js           # sequelize/postgres connection
-│   ├── models/                # User, Store, Rating + associations
-│   ├── controllers/           # auth, admin, store, storeOwner
-│   ├── routes/                # auth, admin, store, storeOwner
-│   ├── middleware/            # JWT auth, role guard, joi validation, error handler
-│   ├── schema/                # joi validation schemas (name/email/address/password rules)
-│   └── seed/seed.js           # creates the default admin account
-└── frontend/
-    ├── src/
-    │   ├── pages/admin         # Dashboard, Stores, Users, Add Store, Add User, User Details
-    │   ├── pages/user          # Stores list (search + submit/modify rating)
-    │   ├── pages/storeOwner    # Dashboard (raters + avg rating)
-    │   ├── context/AuthContext.jsx
-    │   └── components/         # Navbar, PrivateRoute, StarRating, etc.
-    └── index.html               # bootstrap + fontawesome via CDN
-```
 
-## Setup
+Open **two separate terminals**: one for the backend and one for the frontend.
 
-### 1. Database
-Create a PostgreSQL database:
-```sql
-CREATE DATABASE store_rating_db;
-```
+---
 
-### 2. Backend
+## Backend Setup
+
+Navigate to the backend directory:
+
 ```bash
 cd backend
-npm install
-cp .env.example .env
-# edit .env with your postgres credentials
-npm run seed     # creates default admin + syncs tables
-npm run dev       # starts on http://localhost:8080
 ```
 
-Default admin login (created by the seed script):
-- Email: `admin@storerating.com`
-- Password: `Admin@1234`
+Install all backend dependencies:
 
-### 3. Frontend
+```bash
+npm install
+```
+
+---
+
+## Frontend Setup
+
+Navigate to the frontend directory:
+
 ```bash
 cd frontend
-npm install
-npm run dev       # starts on http://localhost:5173, proxies /api to :8080
 ```
 
-Open http://localhost:5173
+Install all frontend dependencies:
 
-## How each role's requirements are covered
+```bash
+npm install
+```
 
-**System Administrator** (login as seeded admin, or any user you create with role=admin)
-- `/admin/dashboard` — total users, stores, ratings
-- `/admin/users/add` — add normal users or admin users (Name, Email, Password, Address)
-- `/admin/stores/add` — add a store, which also creates its Store Owner login in one step
-- `/admin/stores` — list with Name/Email/Address/Rating, filterable, sortable (click column headers)
-- `/admin/users` — list with Name/Email/Address/Role, filterable (incl. by role), sortable
-- `/admin/users/:id` — full details; shows Rating if the user is a Store Owner
-- Logout via navbar
+---
 
-**Normal User**
-- `/signup` — Name, Email, Address, Password
-- `/update-password` — change password after login
-- `/stores` — all stores, searchable by Name/Address, shows Store Name/Address/Overall Rating/Your Rating, click stars to submit or modify a rating (1-5)
+# Running the Project
 
-**Store Owner** (account created by admin when a store is added)
-- `/store-owner/dashboard` — list of users who rated their store + average rating
-- `/update-password`
+## Step 1: Start the Backend
 
-**Validations** (enforced both client-side via HTML attributes and server-side via Joi):
-- Name: 20-60 characters
-- Address: max 400 characters
-- Password: 8-16 characters, min 1 uppercase + 1 special character
-- Email: standard format
+In the backend terminal, execute the database seed command:
 
-## Notes
-- Auth is JWT-based (stored in localStorage), attached via an axios interceptor.
-- Passwords are hashed with bcrypt.
-- Sorting/filtering on listings is done server-side via query params (`sortBy`, `sortOrder`, `name`, `email`, `address`, `role`).
-- The UI intentionally stays simple/utilitarian (Bootstrap tables & cards, Font Awesome icons) per the "keep it simple" requirement — no custom design system.
+```bash
+npm run seed
+```
+
+Once the database has been seeded successfully, start the backend server:
+
+```bash
+npm run dev
+```
+
+---
+
+## Step 2: Start the Frontend
+
+In the frontend terminal, start the React application:
+
+```bash
+npm run dev
+```
+
+---
+
+# Application Access
+
+After both servers are running successfully, open your browser and visit:
+
+```text
+http://localhost:5173
+```
+
+---
+
+# Project Structure
+
+```text
+store-rating-app/
+│
+├── backend/
+│   ├── config/
+│   ├── controllers/
+│   ├── middleware/
+│   ├── models/
+│   ├── routes/
+│   ├── schema/
+│   ├── seed/
+│   ├── utils/
+│   ├── app.js
+│   └── package.json
+│
+├── frontend/
+│   ├── public/
+│   ├── src/
+│   ├── index.html
+│   ├── vite.config.js
+│   └── package.json
+│
+└── README.md
+```
+
+---
+
+# Database Configuration
+
+Ensure that:
+
+1. MySQL Server is running.
+2. A database has been created in MySQL.
+3. The database credentials in the backend `.env` file are configured correctly.
+
+Example:
+
+```env
+DB_HOST=localhost
+DB_PORT=3306
+DB_NAME=your_database_name
+DB_USER=your_mysql_username
+DB_PASSWORD=your_mysql_password
+```
+
+---
+
+# Important Notes
+
+* Run `npm install` in both the `backend` and `frontend` directories before starting the application.
+* Execute `npm run seed` before running the backend server for the first time.
+* Ensure MySQL is running and properly configured.
+* Verify that all environment variables are set correctly in the `.env` file.
+* If new dependencies are added, rerun `npm install`.
+
+---
+
+# Author
+Atharva Shete
